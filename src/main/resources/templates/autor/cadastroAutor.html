@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="biblioteca">
+<head>
+<base href="/" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Biblioteca</title>
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css" />
+<script src="jquery-3.2.0.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="angular-1.6.3/angular.min.js"></script>
+<script src="angular-1.6.3/angular-animate.min.js"></script>
+<script src="angular-1.6.3/angular-resource.min.js"></script>
+<script src="angular-1.6.3/angular-route.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/controllers/biblioteca-controller.js"></script>
+<script src="js/directives/diretivas.js"></script>
+<script src="js/base64ArrayBuffer.js"></script>
+</head>
+<body ng-controller="BibliotecaController">
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Biblioteca</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="biblioteca/">Home</a></li>
+					<li class="dropdown">
+						<a href="#" ng-click="$event.preventDefault();" class="dropdown-toggle"
+							data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false">Menu 
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="#" ng-click="$event.preventDefault();cadastroAutor();">Novo Autor</a></li>
+							<li><a href="#">Autores</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="#">Novo Livro</a></li>
+							<li><a href="#">Livros</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<br /><br /><br /><br />
+
+	<form novalidate="novalidate" name="autorForm">
+		<div class="container">
+		
+			<p ng-show="mensagem.length" class="alert alert-success">{{mensagem}}</p>
+		
+			<div class="panel panel-info">
+				<div class="panel-heading"><label>Cadastro de Autor</label></div>
+				
+				<div class="panel-body">
+				
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Nome</label>
+							<input type="text" class="form-control" ng-model="autor.nome" />
+						</div>
+						<div class="form-group">
+							<label>País</label>
+							<select class="form-control" name="nacionalidade" ng-model="autor.nacionalidade">
+								<option value="">Selecione...</option>
+								<option ng-repeat="item in nacionalidades" value="{{item.id}}">{{item.pais}}</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Sobre</label>
+							<textarea class="form-control" rows="5" id="comment" ng-model="autor.descricao"> </textarea>
+						</div>
+						<div class="form-group">
+							<label>Foto</label>
+							<input type="file" class="form-control" file-model="foto"/>
+						</div>
+						<div class="form-group" style="text-align: right">
+							<button type="button" class="btn btn-primary navbar-btn" ng-click="incluir();">Salvar</button>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<img class="img-responsive center-block" ng-src="data:image/JPEG;base64,{{foto64}}" style="width: 50%"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+</body>
+</html>
